@@ -1,6 +1,6 @@
 import mongoose, {connect} from "mongoose";
 
-const con = await connect("mongodb://localhost:27017/saina-assignment1");
+const con = await connect("mongodb://127.0.0.1:27017/saina-assignment1");
 const {db} = mongoose.connection;
 
 const movieSchema = mongoose.Schema(
@@ -17,5 +17,7 @@ const movieSchema = mongoose.Schema(
 const movieModel = mongoose.model("Movie", movieSchema);
 
 const movieCol = await db.createCollection(movieModel);
+
+
 
 mongoose.connection.close();
