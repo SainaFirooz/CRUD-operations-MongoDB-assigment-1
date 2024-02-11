@@ -18,6 +18,7 @@ let runApp = true;
 while(runApp){
     if (input == "5"){
         runApp = false;
+        console.log("Exiting menu.")
     }
 }
 
