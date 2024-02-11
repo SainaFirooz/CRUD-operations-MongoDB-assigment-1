@@ -15,4 +15,9 @@ let input = p("Make a choice by entering a number: ");
 
 let runApp = true;
 
+while(runApp){
+    if (input == "5"){
+        runApp = false;
+    }
+}
 
