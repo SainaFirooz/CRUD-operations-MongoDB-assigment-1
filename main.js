@@ -10,3 +10,9 @@ console.log("2. Add new user-");
 console.log("3. Update existing user.");
 console.log("4. Delete user");
 console.log("5. Exist menu.");
+
+let input = p("Make a choice by entering a number: ");
+
+let runApp = true;
+
+
