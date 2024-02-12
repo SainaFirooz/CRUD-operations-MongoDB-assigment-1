@@ -124,3 +124,34 @@ const addNewMovie = async () => {
       console.error("Error adding new movie", error);
     }
 };
+
+const updateMovie = async () => {
+    try {
+        const { title } = await inquirer.prompt([
+            { type: "input", name: "title", message: "Enter movie title to update: "},
+        ]);
+        const movie = await movieModel.findOne({ title });
+        if (!movie) {
+            console.log("Movie not found.");
+            return;
+        }
+
+        const fields =  ["director", "releaseYear", "genres", "ratings", "cast"];
+        const prompts = fields.map((field) => ({
+            type: "input",
+            name: field,
+            message: `Enter updated ${field} (leave empty to keep unchanged, comma separated):`,
+            default: movie[field],
+        }));
+
+        const answers = await inquirer.prompt(prompts);
+
+        Object.assign(movie, answers);
+
+        await movie.save();
+        console.log("Movie updated successfully.");
+    } catch (error) {
+        console.error("Error updating movie: ", error);
+    }
+      
+};
