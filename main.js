@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import inquirer from "inquirer";
 
 const movieSchema = mongoose.Schema({
-  title: { type: String, required: true },
-  director: { type: String, required: true },
-  releaseYear: { type: Number, required: true },
-  genres: { type: [String], default: [] },
-  ratings: { type: [Number], default: [] },
-  cast: { type: [String], default: [] },
+  title: { type: String },
+  director: { type: String },
+  releaseYear: { type: Number },
+  genres: { type: [String] },
+  ratings: { type: [Number] },
+  cast: { type: [String] },
 });
 
 const movieModel = mongoose.model("Movies", movieSchema);
@@ -24,7 +24,7 @@ const connectToDB = async () => {
 const closeDBConnection = async () => {
   try {
     await mongoose.disconnect();
-    console.log("Disconnected from MongoDB");
+    console.log("Leaving menu.", "Disconnected from MongoDB");
   } catch (error) {
     console.error("Error disconnecting from MongoDB", error);
   }
