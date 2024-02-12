@@ -71,109 +71,116 @@ const menu = async () => {
   }
 };
 
-
 const viewAllMovies = async () => {
-    try {
-      const allMovies = await movieModel.find({});
-      console.log("All Movies", allMovies);
-    } catch (error) {
-      console.error("Error showing all movies", error);
-    }
+  try {
+    const allMovies = await movieModel.find({});
+    console.log("All Movies", allMovies);
+  } catch (error) {
+    console.error("Error showing all movies", error);
+  }
 };
 
 const addNewMovie = async () => {
-    try {
-      const newMovie = await inquirer.prompt([
-        {
-          type: "input",
-          name: "title",
-          message: "Enter the title of the movie: ",
-        },
-        {
-          type: "input",
-          name: "director",
-          message: "Enter the director of the movie:",
-        },
-        {
-          type: "input",
-          name: "releaseYear",
-          message: "Enter the release year of the movie:",
-        },
-        {
-          type: "input",
-          name: "genres",
-          message: "Enter the genres of the movie (comma separated): ",
-          filter: (input) => input.split(",").map((genre) => genre.trim()),
-        },
-        {
-          type: "input",
-          name: "ratings",
-          message: "Enter the ratings of the movie (comma separated): ",
-          filter: (input) => input.split(",").map((rating) => parseFloat(rating.trim())),
-        },
-        {
-          type: "input",
-          name: "cast",
-          message: "Enter the cast of the movie (comma separated): ",
-          filter: (input) => input.split(",").map((cast) => cast.trim()),
-        },
-      ]);
-      const movie = new movieModel(newMovie);
-      await movie.save();
-      console.log("New movie added to the database: ", movie);
-    } catch (error) {
-      console.error("Error adding new movie", error);
-    }
+  try {
+    const newMovie = await inquirer.prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter the title of the movie: ",
+      },
+      {
+        type: "input",
+        name: "director",
+        message: "Enter the director of the movie:",
+      },
+      {
+        type: "input",
+        name: "releaseYear",
+        message: "Enter the release year of the movie:",
+      },
+      {
+        type: "input",
+        name: "genres",
+        message: "Enter the genres of the movie (comma separated): ",
+        filter: (input) => input.split(",").map((genre) => genre.trim()),
+      },
+      {
+        type: "input",
+        name: "ratings",
+        message: "Enter the ratings of the movie (comma separated): ",
+        filter: (input) =>
+          input.split(",").map((rating) => parseFloat(rating.trim())),
+      },
+      {
+        type: "input",
+        name: "cast",
+        message: "Enter the cast of the movie (comma separated): ",
+        filter: (input) => input.split(",").map((cast) => cast.trim()),
+      },
+    ]);
+    const movie = new movieModel(newMovie);
+    await movie.save();
+    console.log("New movie added to the database: ", movie);
+  } catch (error) {
+    console.error("Error adding new movie", error);
+  }
 };
 
 const updateMovie = async () => {
-    try {
-        const { title } = await inquirer.prompt([
-            { type: "input", name: "title", message: "Enter movie title to update: "},
-        ]);
-        const movie = await movieModel.findOne({ title });
-        if (!movie) {
-            console.log("Movie not found.");
-            return;
-        }
-
-        const fields =  ["director", "releaseYear", "genres", "ratings", "cast"];
-        const prompts = fields.map((field) => ({
-            type: "input",
-            name: field,
-            message: `Enter updated ${field} (leave empty to keep unchanged, comma separated):`,
-            default: movie[field],
-        }));
-
-        const answers = await inquirer.prompt(prompts);
-
-        Object.assign(movie, answers);
-
-        await movie.save();
-        console.log("Movie updated successfully.");
-    } catch (error) {
-        console.error("Error updating movie: ", error);
+  try {
+    const { title } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter movie title to update: ",
+      },
+    ]);
+    const movie = await movieModel.findOne({ title });
+    if (!movie) {
+      console.log("Movie not found.");
+      return;
     }
-      
+
+    const fields = ["director", "releaseYear", "genres", "ratings", "cast"];
+    const prompts = fields.map((field) => ({
+      type: "input",
+      name: field,
+      message: `Enter updated ${field} (leave empty to keep unchanged, comma separated):`,
+      default: movie[field],
+    }));
+
+    const answers = await inquirer.prompt(prompts);
+
+    Object.assign(movie, answers);
+
+    await movie.save();
+    console.log("Movie updated successfully.");
+  } catch (error) {
+    console.error("Error updating movie: ", error);
+  }
 };
 
 const deleteMovie = async () => {
-    try {
-      const { title } = await inquirer.prompt([
-        { type: "input", name: "title", message: "Enter movie title to delete: "},
-      ]);
-      const result = await movieModel.deleteOne({ title });
-      if (result.deletedCount === 0) {
-        console.log("Movie not found.");
-        return;
-      }
-      console.log("Movie deleted successfully.");
-    } catch (error) {
-      console.error("Error deleting movie:", error);
+  try {
+    const { title } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter movie title to delete: ",
+      },
+    ]);
+    const result = await movieModel.deleteOne({ title });
+    if (result.deletedCount === 0) {
+      console.log("Movie not found.");
+      return;
     }
-  };
+    console.log("Movie deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting movie:", error);
+  }
+};
 
-  (async () => {
-    await connectToDB();
-    await menu();
-  })();
+(async () => {
+  await connectToDB();
+  await menu();
+})();
