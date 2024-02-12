@@ -172,4 +172,7 @@ const deleteMovie = async () => {
     }
   };
 
-  
+  (async () => {
+    await connectToDB();
+    await menu();
+  })();
