@@ -20,3 +20,12 @@ const connectToDB = async () => {
         console.error("Error connecting to MongoDB", error);
     }
 };
+
+const closeDBConnection = async () => {
+    try {
+        await mongoose.disconnect();
+        console.log("Disconnected from MongoDB");
+    } catch (error) {
+        console.error("Error disconnecting from MongoDB", error);
+    }
+}
