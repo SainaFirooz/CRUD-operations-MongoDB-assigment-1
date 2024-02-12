@@ -11,3 +11,12 @@ const movieSchema = mongoose.Schema({
 });
 
 const movieModel = mongoose.model("Movies", movieSchema);
+
+const connectToDB = async () => {
+    try {
+        await mongoose.connect("mongodb://127.0.0.1:27017/saina-assignment1");
+        console.log("Connected to MongoDB");
+    } catch (error) {
+        console.error("Error connecting to MongoDB", error);
+    }
+};
