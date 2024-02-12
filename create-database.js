@@ -1,10 +1,8 @@
 import mongoose, { connect } from "mongoose";
 
-const uri = "mongodb://127.0.0.1:27017/saina-assignment1"
-
 async function main() {
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect("mongodb://127.0.0.1:27017/saina-assignment1");
         console.log("Conneceted to MongoDB");
 
         
@@ -200,7 +198,7 @@ async function main() {
           ]);
 
           const allMovies = await movieModel.find({});
-          console.log(allMovies);
+          console.log("Movies added to the database: ", allMovies , "Go to main.js for the menu options");
 
           await mongoose.connection.close();
           console.log("Connection closed.");
