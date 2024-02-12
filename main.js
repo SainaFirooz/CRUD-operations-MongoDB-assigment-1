@@ -155,3 +155,21 @@ const updateMovie = async () => {
     }
       
 };
+
+const deleteMovie = async () => {
+    try {
+      const { title } = await inquirer.prompt([
+        { type: "input", name: "title", message: "Enter movie title to delete: "},
+      ]);
+      const result = await movieModel.deleteOne({ title });
+      if (result.deletedCount === 0) {
+        console.log("Movie not found.");
+        return;
+      }
+      console.log("Movie deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting movie:", error);
+    }
+  };
+
+  
