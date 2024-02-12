@@ -16,7 +16,14 @@ let input = p("Make a choice by entering a number: ");
 let runApp = true;
 
 while(runApp){
-    if (input == "5"){
+    if (input == "1"){
+        console.log("Here is a list of all the movies.")
+        // List med alla filmer
+    } else if (input =="2") {
+        console.log("Enter the new data of the new movie: ")
+
+    }
+    else (input == "5"){
         runApp = false;
         console.log("Exiting menu.")
     }
