@@ -69,3 +69,13 @@ const menu = async () => {
     console.error("Error", error);
   }
 };
+
+
+const viewAllMovies = async () => {
+    try {
+      const allMovies = await movieModel.find({});
+      console.log("All Movies", allMovies);
+    } catch (error) {
+      console.error("Error showing all movies", error);
+    }
+};
