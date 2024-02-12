@@ -14,6 +14,7 @@ const movieModel = mongoose.model("Movies", movieSchema);
 
 const connectToDB = async () => {
   try {
+    // Jag behövde ändra localhost till 127.0.0.1, ändra tillbaka till localhost om det inte fungerar
     await mongoose.connect("mongodb://127.0.0.1:27017/saina-assignment1");
     console.log("Connected to MongoDB");
   } catch (error) {

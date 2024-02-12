@@ -2,6 +2,7 @@ import mongoose, { connect } from "mongoose";
 
 async function main() {
   try {
+    // Jag behövde ändra localhost till 127.0.0.1, ändra tillbaka till localhost om det inte fungerar
     await mongoose.connect("mongodb://127.0.0.1:27017/saina-assignment1");
     console.log("Conneceted to MongoDB");
 
