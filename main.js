@@ -33,6 +33,7 @@ const closeDBConnection = async () => {
 const menu = async () => {
   try {
     while (true) {
+      // Jag valde att använda inquirer prompt, tyckte det är smidigare med att använda tangentbordet för att navigera istället för nummer
       const { choice } = await inquirer.prompt([
         {
           type: "list",
@@ -40,7 +41,7 @@ const menu = async () => {
           message: "Menu",
           choices: [
             "View all movies",
-            "Add a new movies",
+            "Add a new movie",
             "Update a movie",
             "Delete a movie",
             "Exit",
@@ -51,7 +52,7 @@ const menu = async () => {
         case "View all movies":
           await viewAllMovies();
           break;
-        case "Add a new movies":
+        case "Add a new movie":
           await addNewMovie();
           break;
         case "Update a movie":
