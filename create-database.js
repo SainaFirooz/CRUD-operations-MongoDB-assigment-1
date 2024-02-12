@@ -199,5 +199,14 @@ async function main() {
             },
           ]);
 
+          const allMovies = await movieModel.find({});
+          console.log(allMovies);
+
+          await mongoose.connection.close();
+          console.log("Connection closed.");
+    } catch (error){
+        console.log("Error", error);
     }
 };
+
+main();
