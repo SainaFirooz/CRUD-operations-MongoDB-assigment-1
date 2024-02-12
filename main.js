@@ -9,3 +9,5 @@ const movieSchema = mongoose.Schema({
     ratings: { type: [Number], default: [] },
     cast: { type: [String], default: [] },
 });
+
+const movieModel = mongoose.model("Movies", movieSchema);
