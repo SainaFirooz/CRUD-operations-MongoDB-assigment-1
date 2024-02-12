@@ -17,5 +17,7 @@ async function main() {
             cast: { type: [String] },
         });
 
+        const movieModel = mongoose.model("Movies", movieSchema);
+
     }
 };
