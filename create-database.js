@@ -7,5 +7,15 @@ async function main() {
         await mongoose.connect(uri);
         console.log("Conneceted to MongoDB");
 
+        
+        const movieSchema = mongoose.Schema({
+            title: { type: String },
+            director: { type: String },
+            releaseYear: { type: Number },
+            genres: { type: [String] },
+            ratings: { type: [Number] },
+            cast: { type: [String] },
+        });
+
     }
-}
+};
